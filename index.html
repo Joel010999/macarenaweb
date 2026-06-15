@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Male Style | Shimmer Walls & Glitter Bar Luxury</title>
+    <meta name="description" content="Decoración premium para eventos y venta mayorista de insumos de Glitter.">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Fuentes Locales */
+        @font-face {
+            font-family: 'Tropical';
+            src: url('./Tipografias/tropicalavenuepersonaluseon-xg4dd.otf') format('opentype');
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: 'HelveticaMale';
+            src: url('./Tipografias/Helvetica/HELVETICA.TTF') format('truetype');
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: 'HelveticaMale';
+            src: url('./Tipografias/Helvetica/HELVETICA-BOLD.TTF') format('truetype');
+            font-weight: bold;
+        }
+
+        :root {
+            --black: #000000;
+            --gray: #F2EEEE;
+            --pink1: #DE3E77;
+            --pink2: #ED699C;
+            --pink3: #F7C5DD;
+            --bg: #FFFFFF;
+            --text: var(--black);
+            
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(222, 62, 119, 0.1);
+            
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'HelveticaMale', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; background: #FAFAFA;
+        }
+
+        .blob {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: float 20s infinite alternate ease-in-out;
+        }
+        .blob-1 { width: 60vw; height: 60vw; background: var(--pink3); top: -20%; right: -10%; }
+        .blob-2 { width: 50vw; height: 50vw; background: var(--pink2); bottom: -20%; left: -10%; animation-delay: -5s; opacity: 0.2; }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-50px, 50px) scale(1.1); } }
+
+        h1, h2, h3, .tropical { font-family: 'Tropical', serif; font-weight: normal; }
+        h2 { font-size: clamp(1.8rem, 2.5vw, 2.4rem); color: var(--pink1); margin-bottom: 1rem; }
+        
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- NAVBAR --- */
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; z-index: 1000; transition: var(--transition); }
+        nav.scrolled { padding: 1rem 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 45px; transition: var(--transition); }
+        .logo:hover img { transform: scale(1.05); }
+        .mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: var(--pink1); }
+        .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: var(--glass-bg); backdrop-filter: blur(20px); padding: 1rem 0; gap: 1rem; box-shadow: var(--glass-shadow); border-bottom: 1px solid var(--glass-border); }
+        .nav-links.active { display: flex; }
+        @media (min-width: 900px) {
+            .mobile-menu-btn { display: none; }
+            .nav-links { display: flex; flex-direction: row; position: static; width: auto; background: none; backdrop-filter: none; padding: 0; gap: 3rem; box-shadow: none; border: none; }
+        }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: normal; position: relative; padding-bottom: 5px; text-align: center; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--pink1); transition: var(--transition); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Botones */
+        .btn { padding: 0.6rem 1.4rem; border-radius: 50px; text-decoration: none; font-weight: normal; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; border: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--pink1), var(--pink2)); color: white; box-shadow: 0 10px 25px rgba(222, 62, 119, 0.4); }
+        .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 35px rgba(222, 62, 119, 0.5); }
+        .btn-glass { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); color: var(--pink1); }
+        .btn-glass:hover { background: white; transform: translateY(-5px); box-shadow: var(--glass-shadow); }
+        .btn-sm { padding: 0.4rem 1rem; font-size: 0.7rem; gap: 0.4rem; }
+
+        /* --- HERO --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; position: relative; z-index: 1; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./jessica-2.jpg') center 20%/cover no-repeat; opacity: 0.2; z-index: -1; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; color: var(--black); margin-bottom: 1.5rem; animation: fadeUp 1s ease-out; }
+        .hero p { font-size: 1.05rem; max-width: 600px; margin: 0 auto 3rem; color: var(--black); opacity: 0.8; animation: fadeUp 1s ease-out 0.2s backwards; font-weight: normal; letter-spacing: 0.5px; }
+        .hero .btn-group { animation: fadeUp 1s ease-out 0.4s backwards; display: flex; justify-content: center; gap: 1.5rem; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- ABOUT SECCION --- */
+        .section { padding: 5rem 0; position: relative; }
+        .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+        @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+        .collage { position: relative; height: 400px; }
+        .collage img { position: absolute; border-radius: 30px; box-shadow: var(--glass-shadow); object-fit: cover; transition: var(--transition); border: 5px solid white; }
+        .collage img:hover { transform: scale(1.05) translateY(-10px); z-index: 10; }
+        .img-1 { width: 60%; height: 60%; top: 0; left: 0; border-top-left-radius: 80px; }
+        .img-2 { width: 50%; height: 50%; bottom: 10%; left: 10%; border-bottom-left-radius: 80px; z-index: 2; }
+        .img-3 { width: 55%; height: 65%; top: 20%; right: 0; border-bottom-right-radius: 80px; z-index: 1; }
+        .about-text h3 { font-family: 'HelveticaMale', sans-serif; color: var(--pink2); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 2rem; }
+        .about-text p { font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(0,0,0,0.7); font-weight: normal; letter-spacing: 0.3px; }
+
+        /* --- SERVICIOS --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+        .service-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 40px; padding: 2rem; text-align: center; transition: var(--transition); }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(222, 62, 119, 0.15); background: rgba(255, 255, 255, 0.9); }
+        .service-img { width: 100%; height: 250px; object-fit: cover; border-radius: 25px; margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.6rem; color: var(--pink1); margin-bottom: 1rem; }
+        .service-card p { font-size: 0.95rem; color: rgba(0,0,0,0.7); line-height: 1.5; }
+
+        /* --- DESTACADOS --- */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .product-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--glass-shadow);
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(222, 62, 119, 0.2); }
+        .product-img-container {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: var(--pink3);
+        }
+        .product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-card:hover .product-img-container img { transform: scale(1.05); }
+        .product-card h4 { font-family: 'Tropical', serif; font-size: 1.5rem; color: var(--pink1); margin-bottom: 0.5rem; }
+        .product-card p { font-size: 0.8rem; color: var(--text); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--pink1); color: white; padding: 4rem 0 2rem; border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 3rem; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
+        @media (min-width: 900px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+        .footer-logo img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
+        .footer-links h5 { font-size: 1.3rem; margin-bottom: 1.5rem; font-family: 'Tropical', serif; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; transform: translateX(5px); }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        
+        .renderbyte-link { text-decoration: none; font-weight: bold; font-family: 'HelveticaMale', sans-serif; background: linear-gradient(270deg, #9b59b6, #ff79c6, #00d2ff, #9b59b6); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientMove 4s ease infinite; transition: var(--transition); }
+        .renderbyte-link:hover { transform: scale(1.05); display: inline-block; }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="container nav-content" style="flex-wrap: wrap; position: relative;">
+            <a href="index.html" class="logo">
+                <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo">
+            </a>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href="https://wa.me/5493585706305" class="btn btn-primary btn-sm btn-consultar">Consultar Ahora</a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">La Marca</a>
+                <a href="#servicios">Servicios</a>
+                <a href="catalogo.html">Catálogo Online</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Male Style</h1>
+                <p>Expertas en el rubro de la decoración y venta de insumos. Elevamos el nivel de tus eventos con un estilo único y asesoramiento personalizado.</p>
+                <div class="btn-group">
+                    <a href="catalogo.html" class="btn btn-primary">Ver Catálogo Completo</a>
+                    <a href="#servicios" class="btn btn-glass">Nuestros Servicios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="section">
+        <div class="container about-grid">
+            <div class="collage">
+                <img src="./jessica-1.jpg" alt="Jessica" class="img-1" loading="lazy">
+                <img src="./jessica-2.jpg" alt="Male Style" class="img-2" loading="lazy">
+                <img src="./jessica-3.jpg" alt="Madre e Hija" class="img-3" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h3>Acerca de Male Style</h3>
+                <h2>Pasión por el brillo</h2>
+                <p>Somos un negocio de madre e hija ubicado en Río Cuarto, Córdoba. Nuestra pasión es hacer que cada evento sea verdaderamente único e inolvidable.</p>
+                <p>Ofrecemos la mejor calidad en servicios de <strong>Glitter Bar</strong> y alquiler de <strong>Shimmer Walls</strong>. Nos destacamos por la seriedad, el prestigio y la confianza que brindamos a cada uno de nuestros clientes.</p>
+                <p>Fusionamos la venta mayorista y minorista de insumos de decoración con un excelente asesoramiento personalizado de alta gama.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="section">
+        <div class="container">
+            <div style="text-align: center;">
+                <h3>Experiencias Luxury</h3>
+                <h2>Servicios Exclusivos</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="./web-assets/Produ 05-01/Tezza-0643.webp" alt="Glitter Bar" class="service-img" loading="lazy" onerror="this.src='./Produ 05-01/Tezza-0643.jpg'">
+                    <h3>Glitter Bar</h3>
+                    <p>Maquillaje artístico con gemas y brillos premium. Una propuesta interactiva para que tus invitados disfruten y luzcan espectaculares.</p>
+                </div>
+
+                <div class="service-card">
+                    <img src="./web-assets/Produ 07-05/Tezza-0128.webp" alt="Shimmer Wall" class="service-img" loading="lazy" onerror="this.src='./Produ 07-05/Tezza-0128.jpg'">
+                    <h3>Shimmer Wall</h3>
+                    <p>Fondos dinámicos de lentejuelas en movimiento. Alquiler de paneles decorativos lujosos para crear la mejor zona fotográfica de tu evento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="destacados" class="section" style="padding-top: 2rem;">
+        <div class="container">
+            <div style="text-align: center;">
+                <h3>Insumos Seleccionados</h3>
+                <h2>Productos Destacados</h2>
+                <p style="max-width: 600px; margin: 1rem auto; opacity: 0.8;">Un vistazo a nuestra colección exclusiva. Todos nuestros productos están disponibles para venta mayorista y minorista.</p>
+            </div>
+
+            <div class="featured-grid" id="featured-grid">
+                <!-- Se inyectará con JS -->
+            </div>
+
+            <div style="text-align: center;">
+                <a href="catalogo.html" class="btn btn-primary">
+                    <i data-lucide="grid"></i> Ver Catálogo Completo (150+ productos)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo Blanco">
+                </div>
+                <p style="opacity: 0.8; font-size: 1.1rem; max-width: 400px; margin-bottom: 2rem;">Autoridad en el rubro de la decoración para eventos. Siempre con las últimas tendencias.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Secciones</h5>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">La Marca</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="catalogo.html">Catálogo Completo</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Contacto</h5>
+                <ul>
+                    <li><a href="mailto:jessidg.diseno@gmail.com"><i data-lucide="mail"></i> jessidg.diseno@gmail.com</a></li>
+                    <li><a href="https://wa.me/5493585706305"><i data-lucide="phone"></i> +54 9 358 576-4955</a></li>
+                    <li><a href="https://instagram.com/malestyle.glitter"><i data-lucide="instagram"></i> @malestyle.glitter</a></li>
+                    <li><span style="opacity: 0.8; display: flex; align-items: center; gap: 0.8rem;"><i data-lucide="map-pin"></i> Río Cuarto, Córdoba</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright">
+            &copy; 2026 <a href="https://renderbyte.net" target="_blank" class="renderbyte-link">RenderByte</a>. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        if(mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        lucide.createIcons();
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Productos destacados
+        const featuredProducts = [
+            { folder: "Produ 01-04", file: "Tezza-0480", category: "Colección Brillante" },
+            { folder: "Produ 05-01", file: "Tezza-0200", category: "Gemas Aurora" },
+            { folder: "Produ 07-05", file: "Tezza-0128", category: "Glitter Exclusivo" },
+            { folder: "Produ 09-03", file: "Tezza-0326", category: "Sets Premium" },
+            { folder: "Produ 29-01", file: "Tezza-0097", category: "Nuevas Tendencias" },
+            { folder: "Produ 05-01", file: "Tezza-1494", category: "Gemas Aurora" },
+            { folder: "Produ 07-05", file: "Tezza-0884", category: "Glitter Exclusivo" },
+            { folder: "Produ 09-03", file: "Tezza-0954", category: "Sets Premium" }
+        ];
+
+        const grid = document.getElementById('featured-grid');
+        featuredProducts.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'product-card';
+            
+            // Usamos .webp de la carpeta web-assets, con fallback a original .jpg
+            const webpPath = `./web-assets/${p.folder}/${p.file}.webp`;
+            const jpgPath = `./${p.folder}/${p.file}.jpg`;
+            
+            const wpMessage = encodeURIComponent(`Hola Male Style, me encantaría pedir el producto destacado: ${p.category} (${p.file}.jpg)`);
+            const wpLink = `https://wa.me/5493585706305?text=${wpMessage}`;
+
+            item.innerHTML = `
+                <div class="product-img-container">
+                    <img src="${webpPath}" loading="lazy" onerror="this.src='${jpgPath}'" alt="Producto Male Style">
+                </div>
+                <h4>${p.category}</h4>
+                <a href="${wpLink}" target="_blank" class="btn btn-outline" style="margin-top: 1rem; width: 100%; border: 1px solid #CCC; color: #333;">
+                    Pedir <i data-lucide="message-circle" size="16"></i>
+                </a>
+            `;
+            grid.appendChild(item);
+        });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
