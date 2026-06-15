@@ -8,12 +8,13 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="productos.js"></script>
 
     <style>
         /* Fuentes Locales */
-        @font-face { font-family: 'Tropical'; src: url('./Tipografias/tropicalavenuepersonaluseon-xg4dd.otf') format('opentype'); font-weight: normal; }
-        @font-face { font-family: 'HelveticaMale'; src: url('./Tipografias/Helvetica/HELVETICA.TTF') format('truetype'); font-weight: normal; }
-        @font-face { font-family: 'HelveticaMale'; src: url('./Tipografias/Helvetica/HELVETICA-BOLD.TTF') format('truetype'); font-weight: bold; }
+        @font-face { font-family: 'Tropical'; src: url('./Tipografias/tropicalavenuepersonaluseon-xg4dd.otf') format('opentype'); font-weight: normal; font-display: swap; }
+        @font-face { font-family: 'HelveticaMale'; src: url('./Tipografias/Helvetica/HELVETICA.TTF') format('truetype'); font-weight: normal; font-display: swap; }
+        @font-face { font-family: 'HelveticaMale'; src: url('./Tipografias/Helvetica/HELVETICA-BOLD.TTF') format('truetype'); font-weight: bold; font-display: swap; }
 
         :root {
             --black: #000000;
@@ -60,9 +61,10 @@
         .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
 
         /* --- NAVBAR --- */
-        nav { position: fixed; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; z-index: 1000; background: transparent; transition: var(--transition); }
+        nav.scrolled { padding: 1rem 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo img { height: 45px; transition: var(--transition); }
+        .logo img { height: 45px; transition: var(--transition); filter: invert(41%) sepia(58%) saturate(1478%) hue-rotate(309deg) brightness(91%) contrast(93%); }
         .logo:hover img { transform: scale(1.05); }
         .mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: var(--pink1); }
         .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: var(--glass-bg); backdrop-filter: blur(20px); padding: 1rem 0; gap: 1rem; box-shadow: var(--glass-shadow); border-bottom: 1px solid var(--glass-border); }
@@ -100,11 +102,102 @@
         .masonry-item:hover img { transform: scale(1.1); }
         .masonry-item:hover .masonry-overlay { opacity: 1; }
 
-        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; transition: var(--transition); font-family: 'HelveticaMale', sans-serif; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
-        .whatsapp-btn:hover { transform: translateY(-5px); background: #128C7E; box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); }
+        /* Botón WhatsApp Premium */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-whatsapp:hover::before {
+            left: 100%;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+            color: white;
+        }
+
         .product-code { font-family: 'Tropical', serif; font-size: 1.3rem; color: var(--pink1); margin-bottom: 0.8rem; }
 
         .load-more-container { text-align: center; margin-top: 4rem; }
+
+        /* --- DESTACADOS --- */
+        .featured-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .product-card {
+            width: 100%;
+            background: white;
+            padding: 1rem;
+            border-radius: 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--glass-shadow);
+            text-decoration: none;
+            display: block;
+        }
+        @media (min-width: 650px) {
+            .product-card { width: calc(50% - 1rem); }
+        }
+        @media (min-width: 1100px) {
+            .product-card { width: calc(25% - 1.5rem); }
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(222, 62, 119, 0.2); }
+        
+        /* --- DESTACADOS COLLAGE --- */
+        .product-collage {
+            display: grid;
+            gap: 5px;
+            height: 250px;
+            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--pink3);
+        }
+        .product-collage.imgs-3, .product-collage.imgs-4, .product-collage.imgs-5 {
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .product-collage.imgs-3 img:nth-child(1), .product-collage.imgs-4 img:nth-child(1), .product-collage.imgs-5 img:nth-child(1) {
+            grid-row: 1 / 3;
+        }
+        .product-collage.imgs-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+        .product-collage img {
+            width: 100%; height: 100%; object-fit: cover; transition: var(--transition);
+        }
+        .product-card:hover .product-collage img { transform: scale(1.05); }
+
+        .product-card h4 { font-family: 'Tropical', serif; font-size: 1.5rem; color: var(--pink1); margin-bottom: 0.5rem; }
 
         /* --- FOOTER --- */
         footer { background: var(--pink1); color: white; padding: 4rem 0 2rem; border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 3rem; }
@@ -138,7 +231,9 @@
                 <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo">
             </a>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <a href="https://wa.me/5493585706305" class="btn btn-primary btn-sm btn-consultar">Consultar Ahora</a>
+                <a href="https://wa.me/5493585706305" class="btn btn-whatsapp" style="padding: 0.5rem 1rem; font-size: 0.7rem;">
+                    <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i> Consultar
+                </a>
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
                     <i data-lucide="menu"></i>
                 </button>
@@ -152,11 +247,23 @@
         </div>
     </nav>
 
+    <section class="section" style="padding-bottom: 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3>Equipamiento Exclusivo</h3>
+                <h2>Productos Principales</h2>
+            </div>
+            <div class="featured-grid" id="main-products-grid">
+                <!-- Se inyectará con JS -->
+            </div>
+        </div>
+    </section>
+
     <section class="section">
         <div class="container">
             <div style="text-align: center; margin-bottom: 4rem;">
                 <h3>Venta por mayor y menor</h3>
-                <h2>Catálogo Completo</h2>
+                <h2>Catálogo de Insumos</h2>
             </div>
 
             <!-- Botones de Filtro -->
@@ -201,7 +308,7 @@
             <div class="footer-links">
                 <h5>Contacto</h5>
                 <ul>
-                    <li><a href="mailto:jessidg.diseno@gmail.com"><i data-lucide="mail"></i> jessidg.diseno@gmail.com</a></li>
+                    <li><a href="mailto:Glitterstyle.m@gmail.com"><i data-lucide="mail"></i> Glitterstyle.m@gmail.com</a></li>
                     <li><a href="https://wa.me/5493585706305"><i data-lucide="phone"></i> +54 9 358 576-4955</a></li>
                     <li><a href="https://instagram.com/malestyle.glitter"><i data-lucide="instagram"></i> @malestyle.glitter</a></li>
                     <li><span style="opacity: 0.8; display: flex; align-items: center; gap: 0.8rem;"><i data-lucide="map-pin"></i> Río Cuarto, Córdoba</span></li>
@@ -288,7 +395,7 @@
                     <img src="${p.pathWebp}" loading="lazy" onerror="this.src='${p.pathOriginal}'" alt="${p.category}">
                     <div class="masonry-overlay">
                         <div class="product-code">${p.category}</div>
-                        <a href="${wpLink}" target="_blank" class="whatsapp-btn">
+                        <a href="${wpLink}" target="_blank" class="btn-whatsapp">
                             <i data-lucide="message-circle"></i> Pedir
                         </a>
                     </div>
@@ -322,6 +429,33 @@
                 renderProducts(true);
             });
         });
+
+        // Productos Principales
+        const mainGrid = document.getElementById('main-products-grid');
+        if(mainGrid && typeof productosPrincipales !== 'undefined') {
+            productosPrincipales.forEach(p => {
+                const item = document.createElement('a');
+                item.className = 'product-card';
+                item.href = `producto.html?id=${p.id}`;
+                
+                let imgLimit = Math.min(p.images.length, 3);
+                let collageHtml = `<div class="product-collage imgs-${imgLimit}">`;
+                for(let i=0; i<imgLimit; i++) {
+                    collageHtml += `<img src="${p.images[i]}" loading="lazy" alt="${p.name}">`;
+                }
+                collageHtml += `</div>`;
+
+                item.innerHTML = `
+                    ${collageHtml}
+                    <h4>${p.name}</h4>
+                    <div class="btn btn-outline" style="margin-top: 1rem; width: 100%; border: 1px solid #CCC; color: #333; justify-content: center;">
+                        Ver Detalles <i data-lucide="eye" size="16"></i>
+                    </div>
+                `;
+                mainGrid.appendChild(item);
+            });
+            lucide.createIcons();
+        }
     </script>
 </body>
 </html>

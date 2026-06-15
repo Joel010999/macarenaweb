@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto | Male Style</title>
+    <meta name="description" content="Detalle de producto Male Style">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="productos.js"></script>
+
+    <style>
+        /* Fuentes Locales */
+        @font-face { font-family: 'Tropical'; src: url('./Tipografias/tropicalavenuepersonaluseon-xg4dd.otf') format('opentype'); font-weight: normal; font-display: swap; }
+        @font-face { font-family: 'HelveticaMale'; src: url('./Tipografias/Helvetica/HELVETICA.TTF') format('truetype'); font-weight: normal; font-display: swap; }
+        @font-face { font-family: 'HelveticaMale'; src: url('./Tipografias/Helvetica/HELVETICA-BOLD.TTF') format('truetype'); font-weight: bold; font-display: swap; }
+
+        :root {
+            --black: #000000;
+            --gray: #F2EEEE;
+            --pink1: #DE3E77;
+            --pink2: #ED699C;
+            --pink3: #F7C5DD;
+            --bg: #FFFFFF;
+            --text: var(--black);
+            
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(222, 62, 119, 0.1);
+            
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'HelveticaMale', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; background: #FAFAFA;
+        }
+
+        .blob {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: float 20s infinite alternate ease-in-out;
+        }
+        .blob-1 { width: 60vw; height: 60vw; background: var(--pink3); top: -20%; right: -10%; }
+        .blob-2 { width: 50vw; height: 50vw; background: var(--pink2); bottom: -20%; left: -10%; animation-delay: -5s; opacity: 0.2; }
+
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-50px, 50px) scale(1.1); } }
+
+        h1, h2, h3, .tropical { font-family: 'Tropical', serif; font-weight: normal; }
+        h2 { font-size: clamp(1.8rem, 2.5vw, 2.4rem); color: var(--pink1); margin-bottom: 1rem; }
+        
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- NAVBAR --- */
+        nav { position: fixed; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 45px; transition: var(--transition); filter: invert(41%) sepia(58%) saturate(1478%) hue-rotate(309deg) brightness(91%) contrast(93%); }
+        .logo:hover img { transform: scale(1.05); }
+        .mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: var(--pink1); }
+        .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: var(--glass-bg); backdrop-filter: blur(20px); padding: 1rem 0; gap: 1rem; box-shadow: var(--glass-shadow); border-bottom: 1px solid var(--glass-border); }
+        .nav-links.active { display: flex; }
+        @media (min-width: 900px) {
+            .mobile-menu-btn { display: none; }
+            .nav-links { display: flex; flex-direction: row; position: static; width: auto; background: none; backdrop-filter: none; padding: 0; gap: 3rem; box-shadow: none; border: none; }
+        }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: normal; position: relative; padding-bottom: 5px; text-align: center; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--pink1); transition: var(--transition); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Botones */
+        .btn { padding: 0.6rem 1.4rem; border-radius: 50px; text-decoration: none; font-weight: normal; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; border: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--pink1), var(--pink2)); color: white; box-shadow: 0 10px 25px rgba(222, 62, 119, 0.4); }
+        .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 35px rgba(222, 62, 119, 0.5); }
+        .btn-sm { padding: 0.4rem 1rem; font-size: 0.7rem; gap: 0.4rem; }
+
+        /* --- PRODUCT DETAILS --- */
+        .product-section { padding: 8rem 0 4rem; min-height: 80vh; }
+        .product-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+        @media (min-width: 900px) { .product-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .product-gallery { display: flex; flex-direction: column; gap: 1rem; }
+        .main-image { width: 100%; border-radius: 30px; overflow: hidden; background: transparent; box-shadow: var(--glass-shadow); }
+        .main-image img { width: 100%; height: auto; display: block; object-fit: cover; max-height: 600px; border-radius: 30px; }
+        
+        .thumbnails { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; }
+        .thumbnail { width: 80px; height: 80px; border-radius: 15px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: var(--transition); flex-shrink: 0; background: transparent; }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; border-radius: 13px; }
+        .thumbnail.active { border-color: var(--pink1); transform: scale(1.1); box-shadow: 0 5px 15px rgba(222, 62, 119, 0.3); }
+        
+        .product-info { padding: 1rem 0; }
+        .product-info h1 { font-family: 'Tropical', serif; font-size: 3rem; color: var(--pink1); margin-bottom: 1rem; }
+        .product-info p { font-size: 1.1rem; color: rgba(0,0,0,0.8); margin-bottom: 2rem; line-height: 1.8; }
+        
+        /* Botón WhatsApp Premium */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-whatsapp:hover::before {
+            left: 100%;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+            color: white;
+        }
+        .btn-whatsapp-large {
+            font-size: 1rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--pink1); text-decoration: none; margin-bottom: 2rem; font-weight: bold; transition: var(--transition); }
+        .back-link:hover { transform: translateX(-5px); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--pink1); color: white; padding: 4rem 0 2rem; border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 3rem; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
+        @media (min-width: 900px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+        .footer-logo img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
+        .footer-links h5 { font-size: 1.3rem; margin-bottom: 1.5rem; font-family: 'Tropical', serif; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; transform: translateX(5px); }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        
+        .renderbyte-link { text-decoration: none; font-weight: bold; font-family: 'HelveticaMale', sans-serif; background: linear-gradient(270deg, #9b59b6, #ff79c6, #00d2ff, #9b59b6); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientMove 4s ease infinite; transition: var(--transition); }
+        .renderbyte-link:hover { transform: scale(1.05); display: inline-block; }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="container nav-content" style="flex-wrap: wrap; position: relative;">
+            <a href="index.html" class="logo">
+                <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo">
+            </a>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href="https://wa.me/5493585706305" class="btn btn-whatsapp" style="padding: 0.5rem 1rem; font-size: 0.7rem;">
+                    <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i> Consultar
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="index.html#nosotros">La Marca</a>
+                <a href="index.html#servicios">Servicios</a>
+                <a href="catalogo.html" style="color: var(--pink1);">Catálogo Online</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="product-section">
+        <div class="container" id="product-container">
+            <!-- Cargando... -->
+            <div style="text-align: center; padding: 4rem;">
+                <p>Cargando producto...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo Blanco">
+                </div>
+                <p style="opacity: 0.8; font-size: 1.1rem; max-width: 400px; margin-bottom: 2rem;">Autoridad en el rubro de la decoración para eventos. Siempre con las últimas tendencias.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Secciones</h5>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#nosotros">La Marca</a></li>
+                    <li><a href="index.html#servicios">Servicios</a></li>
+                    <li><a href="catalogo.html">Catálogo Completo</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Contacto</h5>
+                <ul>
+                    <li><a href="mailto:Glitterstyle.m@gmail.com"><i data-lucide="mail"></i> Glitterstyle.m@gmail.com</a></li>
+                    <li><a href="https://wa.me/5493585706305"><i data-lucide="phone"></i> +54 9 358 576-4955</a></li>
+                    <li><a href="https://instagram.com/malestyle.glitter"><i data-lucide="instagram"></i> @malestyle.glitter</a></li>
+                    <li><span style="opacity: 0.8; display: flex; align-items: center; gap: 0.8rem;"><i data-lucide="map-pin"></i> Río Cuarto, Córdoba</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright">
+            &copy; 2026 <a href="https://renderbyte.net" target="_blank" class="renderbyte-link">RenderByte</a>. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        if(mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+        lucide.createIcons();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get("id");
+            const container = document.getElementById("product-container");
+
+            if (!productId || !productosPrincipales) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 4rem;">
+                        <h2>Producto no encontrado</h2>
+                        <a href="catalogo.html" class="btn btn-primary" style="margin-top: 2rem;">Volver al Catálogo</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const product = productosPrincipales.find(p => p.id === productId);
+
+            if (!product) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 4rem;">
+                        <h2>Producto no encontrado</h2>
+                        <a href="catalogo.html" class="btn btn-primary" style="margin-top: 2rem;">Volver al Catálogo</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const wpMessage = encodeURIComponent(`Hola Male Style, me encantaría consultar por el producto: ${product.name}`);
+            const wpLink = `https://wa.me/5493585706305?text=${wpMessage}`;
+
+            let thumbnailsHtml = '';
+            product.images.forEach((img, index) => {
+                thumbnailsHtml += `
+                    <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeImage(this, '${img}')">
+                        <img src="${img}" alt="${product.name} ${index + 1}">
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `
+                <a href="catalogo.html" class="back-link">
+                    <i data-lucide="arrow-left"></i> Volver al Catálogo
+                </a>
+                <div class="product-grid">
+                    <div class="product-gallery">
+                        <div class="main-image">
+                            <img id="main-product-image" src="${product.images[0]}" alt="${product.name}">
+                        </div>
+                        <div class="thumbnails">
+                            ${thumbnailsHtml}
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h1>${product.name}</h1>
+                        <p>${product.description}</p>
+                        <a href="${wpLink}" target="_blank" class="btn-whatsapp btn-whatsapp-large">
+                            <i data-lucide="message-circle"></i> Consultar Precio
+                        </a>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        });
+
+        function changeImage(thumbElement, src) {
+            document.getElementById('main-product-image').src = src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumbElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>

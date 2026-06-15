@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Male Style | Shimmer Walls & Glitter Bar Luxury</title>
-    <meta name="description" content="Decoración premium para eventos y venta mayorista de insumos de Glitter.">
+    <meta name="description" content="Decoración premium para eventos y venta mayorista de insumos de Glitter. Servicio de Glitter Bar y Alquiler de Shimmer Wall en Río Cuarto, Córdoba.">
     
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="./Tipografias/tropicalavenuepersonaluseon-xg4dd.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="./Tipografias/Helvetica/HELVETICA.TTF" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./Logo/PNG transparente/Recurso 24@2x.png" as="image">
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -15,18 +20,21 @@
             font-family: 'Tropical';
             src: url('./Tipografias/tropicalavenuepersonaluseon-xg4dd.otf') format('opentype');
             font-weight: normal;
+            font-display: swap;
         }
 
         @font-face {
             font-family: 'HelveticaMale';
             src: url('./Tipografias/Helvetica/HELVETICA.TTF') format('truetype');
             font-weight: normal;
+            font-display: swap;
         }
 
         @font-face {
             font-family: 'HelveticaMale';
             src: url('./Tipografias/Helvetica/HELVETICA-BOLD.TTF') format('truetype');
             font-weight: bold;
+            font-display: swap;
         }
 
         :root {
@@ -56,28 +64,60 @@
             position: relative;
         }
 
+        /* --- PRELOADER --- */
+        body.loading { overflow: hidden; }
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #fff0f5, #fff);
+            z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .preloader-logo {
+            width: 180px; height: auto; margin-bottom: 2rem;
+            filter: invert(41%) sepia(58%) saturate(1478%) hue-rotate(309deg) brightness(91%) contrast(93%);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.7; } }
+        .preloader-bar-container {
+            width: 220px; height: 6px; background: var(--pink3); border-radius: 10px; overflow: hidden; margin-bottom: 1rem;
+        }
+        .preloader-bar {
+            height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink1), var(--pink2));
+            border-radius: 10px; transition: width 0.3s ease;
+        }
+        .preloader-percent {
+            font-family: 'HelveticaMale', sans-serif; font-size: 0.85rem; color: var(--pink1);
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        /* --- AMBIENT --- */
         .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; background: #FAFAFA;
         }
-
         .blob {
             position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: float 20s infinite alternate ease-in-out;
         }
         .blob-1 { width: 60vw; height: 60vw; background: var(--pink3); top: -20%; right: -10%; }
         .blob-2 { width: 50vw; height: 50vw; background: var(--pink2); bottom: -20%; left: -10%; animation-delay: -5s; opacity: 0.2; }
-
         @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-50px, 50px) scale(1.1); } }
 
+        /* --- TYPOGRAPHY --- */
         h1, h2, h3, .tropical { font-family: 'Tropical', serif; font-weight: normal; }
-        h2 { font-size: clamp(1.8rem, 2.5vw, 2.4rem); color: var(--pink1); margin-bottom: 1rem; }
+        h1 { font-size: clamp(3.5rem, 8vw, 6rem); line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; color: var(--pink1); }
+        h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); margin-bottom: 1rem; color: var(--pink1); }
+        h3 { font-size: clamp(0.75rem, 1.5vw, 0.85rem); }
         
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 1.2rem; }
+        @media (min-width: 768px) { .container { padding: 0 2rem; } }
 
         /* --- NAVBAR --- */
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; z-index: 1000; transition: var(--transition); }
-        nav.scrolled { padding: 1rem 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
+        nav { position: fixed; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background: transparent; transition: var(--transition); }
+        nav.scrolled { padding: 0.8rem 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo img { height: 45px; transition: var(--transition); }
+        .logo img { height: 35px; transition: var(--transition); filter: invert(41%) sepia(58%) saturate(1478%) hue-rotate(309deg) brightness(91%) contrast(93%); }
+        @media (min-width: 768px) { .logo img { height: 45px; } }
         .logo:hover img { transform: scale(1.05); }
         .mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: var(--pink1); }
         .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: var(--glass-bg); backdrop-filter: blur(20px); padding: 1rem 0; gap: 1rem; box-shadow: var(--glass-shadow); border-bottom: 1px solid var(--glass-border); }
@@ -91,26 +131,53 @@
         .nav-links a:hover::after { width: 100%; }
 
         /* Botones */
-        .btn { padding: 0.6rem 1.4rem; border-radius: 50px; text-decoration: none; font-weight: normal; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; border: none; }
+        .btn { padding: 0.6rem 1.4rem; border-radius: 50px; text-decoration: none; font-weight: normal; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.7rem; border: none; }
+        @media (min-width: 768px) { .btn { font-size: 0.75rem; } }
         .btn-primary { background: linear-gradient(135deg, var(--pink1), var(--pink2)); color: white; box-shadow: 0 10px 25px rgba(222, 62, 119, 0.4); }
         .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 35px rgba(222, 62, 119, 0.5); }
         .btn-glass { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); color: var(--pink1); }
         .btn-glass:hover { background: white; transform: translateY(-5px); box-shadow: var(--glass-shadow); }
         .btn-sm { padding: 0.4rem 1rem; font-size: 0.7rem; gap: 0.4rem; }
 
+        /* Botón WhatsApp Premium */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+            position: relative; overflow: hidden;
+        }
+        .btn-whatsapp::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-whatsapp:hover::before { left: 100%; }
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); color: white;
+        }
+
         /* --- HERO --- */
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; position: relative; z-index: 1; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./jessica-2.jpg') center 20%/cover no-repeat; opacity: 0.2; z-index: -1; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px; }
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; color: var(--black); margin-bottom: 1.5rem; animation: fadeUp 1s ease-out; }
-        .hero p { font-size: 1.05rem; max-width: 600px; margin: 0 auto 3rem; color: var(--black); opacity: 0.8; animation: fadeUp 1s ease-out 0.2s backwards; font-weight: normal; letter-spacing: 0.5px; }
-        .hero .btn-group { animation: fadeUp 1s ease-out 0.4s backwards; display: flex; justify-content: center; gap: 1.5rem; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('./jessica-2.jpg') center 20%/cover no-repeat; opacity: 0.2; z-index: -1; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
+        @media (min-width: 768px) { .hero::before { border-bottom-left-radius: 80px; border-bottom-right-radius: 80px; } }
+        .hero-content { max-width: 800px; padding: 0 1rem; }
+        .hero-logo { width: 80%; max-width: 450px; height: auto; margin-bottom: 2rem; filter: invert(41%) sepia(58%) saturate(1478%) hue-rotate(309deg) brightness(91%) contrast(93%); animation: fadeUp 1s ease-out; }
+        .hero p { font-size: clamp(0.95rem, 2vw, 1.2rem); margin-bottom: 2.5rem; opacity: 0.9; animation: fadeUp 1s ease-out 0.2s backwards; font-weight: normal; letter-spacing: 0.5px; }
+        .hero .btn-group { animation: fadeUp 1s ease-out 0.4s backwards; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- ABOUT SECCION --- */
-        .section { padding: 5rem 0; position: relative; }
-        .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
-        @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; } }
-        .collage { position: relative; height: 400px; }
+        /* --- ABOUT --- */
+        .section { padding: 3rem 0; position: relative; }
+        @media (min-width: 768px) { .section { padding: 5rem 0; } }
+        .about-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
+        @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+        .collage { position: relative; height: 280px; }
+        @media (min-width: 768px) { .collage { height: 400px; } }
         .collage img { position: absolute; border-radius: 30px; box-shadow: var(--glass-shadow); object-fit: cover; transition: var(--transition); border: 5px solid white; }
         .collage img:hover { transform: scale(1.05) translateY(-10px); z-index: 10; }
         .img-1 { width: 60%; height: 60%; top: 0; left: 0; border-top-left-radius: 80px; }
@@ -119,46 +186,70 @@
         .about-text h3 { font-family: 'HelveticaMale', sans-serif; color: var(--pink2); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 2rem; }
         .about-text p { font-size: 0.95rem; margin-bottom: 1.5rem; color: rgba(0,0,0,0.7); font-weight: normal; letter-spacing: 0.3px; }
 
+        /* --- VIDEO SECTION --- */
+        .video-section {
+            display: flex; flex-direction: column; align-items: center; gap: 2rem;
+            max-width: 1100px; margin: 0 auto;
+        }
+        .video-text { text-align: center; }
+        .video-frame-outer {
+            width: 100%; max-width: 280px; border-radius: 35px; padding: 6px;
+            background: linear-gradient(135deg, var(--pink3), var(--pink1));
+            box-shadow: 0 25px 50px rgba(222, 62, 119, 0.3);
+            transition: var(--transition);
+        }
+        .video-frame-inner {
+            border-radius: 30px; overflow: hidden; background: white; transition: var(--transition);
+        }
+        .video-frame-inner video { width: 100%; height: auto; display: block; object-fit: cover; }
+        @media (min-width: 768px) {
+            .video-section { flex-direction: row; gap: 4rem; justify-content: space-between; }
+            .video-text { text-align: left; flex: 1 1 400px; }
+            .video-frame-outer { max-width: 320px; transform: rotate(3deg); }
+            .video-frame-inner { transform: rotate(-3deg); }
+            .video-frame-outer:hover { transform: rotate(0deg); }
+            .video-frame-outer:hover .video-frame-inner { transform: rotate(0deg); }
+        }
+
         /* --- SERVICIOS --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
-        .service-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 40px; padding: 2rem; text-align: center; transition: var(--transition); }
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+        @media (min-width: 768px) { .services-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 3rem; } }
+        .service-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 1.5rem; text-align: center; transition: var(--transition); }
+        @media (min-width: 768px) { .service-card { border-radius: 40px; padding: 2rem; } }
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(222, 62, 119, 0.15); background: rgba(255, 255, 255, 0.9); }
-        .service-img { width: 100%; height: 250px; object-fit: cover; border-radius: 25px; margin-bottom: 1.5rem; }
-        .service-card h3 { font-size: 1.6rem; color: var(--pink1); margin-bottom: 1rem; }
+        .service-img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; margin-bottom: 1.5rem; }
+        @media (min-width: 768px) { .service-img { height: 250px; border-radius: 25px; } }
+        .service-card h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); color: var(--pink1); margin-bottom: 1rem; }
         .service-card p { font-size: 0.95rem; color: rgba(0,0,0,0.7); line-height: 1.5; }
 
         /* --- DESTACADOS --- */
         .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2.5rem;
-            margin-bottom: 2.5rem;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 1.2rem; margin-top: 2rem; margin-bottom: 2rem;
         }
+        @media (min-width: 768px) { .featured-grid { gap: 2rem; margin-top: 2.5rem; margin-bottom: 2.5rem; } }
         .product-card {
-            background: white;
-            padding: 1rem;
-            border-radius: 30px;
-            text-align: center;
-            transition: var(--transition);
-            box-shadow: var(--glass-shadow);
+            width: 100%; background: white; padding: 1rem; border-radius: 20px;
+            text-align: center; transition: var(--transition); box-shadow: var(--glass-shadow);
+            text-decoration: none; display: block;
         }
+        @media (min-width: 500px) { .product-card { width: calc(50% - 0.6rem); } }
+        @media (min-width: 768px) { .product-card { width: calc(50% - 1rem); border-radius: 30px; } }
+        @media (min-width: 1100px) { .product-card { width: calc(25% - 1.5rem); } }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(222, 62, 119, 0.2); }
         .product-img-container {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            background: var(--pink3);
+            width: 100%; aspect-ratio: 1; border-radius: 15px; overflow: hidden;
+            margin-bottom: 1rem; background: var(--pink3);
         }
+        @media (min-width: 768px) { .product-img-container { border-radius: 20px; margin-bottom: 1.5rem; } }
         .product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
         .product-card:hover .product-img-container img { transform: scale(1.05); }
-        .product-card h4 { font-family: 'Tropical', serif; font-size: 1.5rem; color: var(--pink1); margin-bottom: 0.5rem; }
+        .product-card h4 { font-family: 'Tropical', serif; font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--pink1); margin-bottom: 0.5rem; }
         .product-card p { font-size: 0.8rem; color: var(--text); opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- FOOTER --- */
-        footer { background: var(--pink1); color: white; padding: 4rem 0 2rem; border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 3rem; }
+        footer { background: var(--pink1); color: white; padding: 3rem 0 2rem; border-top-left-radius: 40px; border-top-right-radius: 40px; margin-top: 2rem; }
+        @media (min-width: 768px) { footer { padding: 4rem 0 2rem; border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 3rem; } }
         .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
         @media (min-width: 900px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
         .footer-logo img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
@@ -176,7 +267,16 @@
 
     </style>
 </head>
-<body>
+<body class="loading">
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style" class="preloader-logo">
+        <div class="preloader-bar-container">
+            <div class="preloader-bar" id="preloader-bar"></div>
+        </div>
+        <span class="preloader-percent" id="preloader-percent">Cargando... 0%</span>
+    </div>
 
     <div class="ambient-bg">
         <div class="blob blob-1"></div>
@@ -189,7 +289,9 @@
                 <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo">
             </a>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <a href="https://wa.me/5493585706305" class="btn btn-primary btn-sm btn-consultar">Consultar Ahora</a>
+                <a href="https://wa.me/5493585706305" class="btn btn-whatsapp" style="padding: 0.5rem 1rem; font-size: 0.7rem;">
+                    <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i> Consultar
+                </a>
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
                     <i data-lucide="menu"></i>
                 </button>
@@ -206,7 +308,7 @@
     <section id="inicio" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Male Style</h1>
+                <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style" class="hero-logo">
                 <p>Expertas en el rubro de la decoración y venta de insumos. Elevamos el nivel de tus eventos con un estilo único y asesoramiento personalizado.</p>
                 <div class="btn-group">
                     <a href="catalogo.html" class="btn btn-primary">Ver Catálogo Completo</a>
@@ -233,6 +335,33 @@
         </div>
     </section>
 
+    <section class="section" style="padding-top: 0; padding-bottom: 2rem;">
+        <div class="container video-section">
+            
+            <div class="video-text">
+                <h3 style="font-family: 'HelveticaMale', sans-serif; color: var(--pink2); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 1rem;">Nuestra Experiencia</h3>
+                <h2 style="font-family: 'Tropical', serif; font-size: clamp(2rem, 4vw, 3.5rem); color: var(--pink1); line-height: 1.1; margin-bottom: 1.5rem;">Creamos momentos inolvidables</h2>
+                <p style="font-size: clamp(0.95rem, 1.5vw, 1.1rem); color: rgba(0,0,0,0.8); line-height: 1.8; margin-bottom: 1rem;">
+                    No es solo decoración, es vivir el brillo y la elegancia al máximo. Observa un poco de lo que somos capaces de lograr en tus eventos. 
+                </p>
+                <p style="font-size: clamp(0.95rem, 1.5vw, 1.1rem); color: rgba(0,0,0,0.8); line-height: 1.8;">
+                    Desde los lujosos <strong>Shimmer Walls</strong> hasta la diversión de nuestro <strong>Glitter Bar</strong>, cada detalle está pensado para hacerte brillar.
+                </p>
+            </div>
+
+            <div style="flex: 0 0 auto; display: flex; justify-content: center;">
+                <div class="video-frame-outer">
+                    <div class="video-frame-inner">
+                        <video id="hero-video" autoplay loop controls playsinline style="width: 100%; height: auto; display: block; object-fit: cover;">
+                            <!-- Source will be set by preloader JS -->
+                        </video>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
     <section id="servicios" class="section">
         <div class="container">
             <div style="text-align: center;">
@@ -242,15 +371,17 @@
             
             <div class="services-grid">
                 <div class="service-card">
-                    <img src="./web-assets/Produ 05-01/Tezza-0643.webp" alt="Glitter Bar" class="service-img" loading="lazy" onerror="this.src='./Produ 05-01/Tezza-0643.jpg'">
-                    <h3>Glitter Bar</h3>
+                    <img src="./web-assets/Produ 05-01/Tezza-0643.webp" alt="Servicio de Glitter Bar" class="service-img" loading="lazy" onerror="this.src='./Produ 05-01/Tezza-0643.jpg'">
+                    <h3>Servicio de Glitter Bar</h3>
+                    <p style="color: var(--pink2); font-weight: bold; font-family: 'HelveticaMale', sans-serif; margin-bottom: 0.8rem;"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i> Río Cuarto - Cba</p>
                     <p>Maquillaje artístico con gemas y brillos premium. Una propuesta interactiva para que tus invitados disfruten y luzcan espectaculares.</p>
                 </div>
 
                 <div class="service-card">
-                    <img src="./web-assets/Produ 07-05/Tezza-0128.webp" alt="Shimmer Wall" class="service-img" loading="lazy" onerror="this.src='./Produ 07-05/Tezza-0128.jpg'">
-                    <h3>Shimmer Wall</h3>
-                    <p>Fondos dinámicos de lentejuelas en movimiento. Alquiler de paneles decorativos lujosos para crear la mejor zona fotográfica de tu evento.</p>
+                    <img src="./web-assets/Produ 07-05/Tezza-0128.webp" alt="Alquiler Shimmer Wall" class="service-img" loading="lazy" onerror="this.src='./Produ 07-05/Tezza-0128.jpg'">
+                    <h3>Alquiler Shimmer Wall</h3>
+                    <p style="color: var(--pink2); font-weight: bold; font-family: 'HelveticaMale', sans-serif; margin-bottom: 0.8rem;"><i data-lucide="map-pin" style="width: 16px; height: 16px;"></i> Río Cuarto - Cba</p>
+                    <p>Fondos dinámicos de lentejuelas en movimiento. Paneles decorativos lujosos para crear la mejor zona fotográfica de tu evento.</p>
                 </div>
             </div>
         </div>
@@ -296,7 +427,7 @@
             <div class="footer-links">
                 <h5>Contacto</h5>
                 <ul>
-                    <li><a href="mailto:jessidg.diseno@gmail.com"><i data-lucide="mail"></i> jessidg.diseno@gmail.com</a></li>
+                    <li><a href="mailto:Glitterstyle.m@gmail.com"><i data-lucide="mail"></i> Glitterstyle.m@gmail.com</a></li>
                     <li><a href="https://wa.me/5493585706305"><i data-lucide="phone"></i> +54 9 358 576-4955</a></li>
                     <li><a href="https://instagram.com/malestyle.glitter"><i data-lucide="instagram"></i> @malestyle.glitter</a></li>
                     <li><span style="opacity: 0.8; display: flex; align-items: center; gap: 0.8rem;"><i data-lucide="map-pin"></i> Río Cuarto, Córdoba</span></li>
@@ -309,7 +440,76 @@
     </footer>
 
     <script>
-        
+        // ========== PRELOADER: Download video with progress ==========
+        (async function() {
+            const bar = document.getElementById('preloader-bar');
+            const percentText = document.getElementById('preloader-percent');
+            const preloader = document.getElementById('preloader');
+            const video = document.getElementById('hero-video');
+
+            try {
+                const response = await fetch('./video-presentacion.mp4');
+                const contentLength = response.headers.get('Content-Length');
+                const total = contentLength ? parseInt(contentLength, 10) : 0;
+                const reader = response.body.getReader();
+                let received = 0;
+                const chunks = [];
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    chunks.push(value);
+                    received += value.length;
+                    
+                    if (total > 0) {
+                        const pct = Math.min(Math.round((received / total) * 100), 100);
+                        bar.style.width = pct + '%';
+                        percentText.textContent = 'Cargando... ' + pct + '%';
+                    } else {
+                        // If no content-length, show animated progress
+                        const fakePct = Math.min(Math.round((received / (received + 500000)) * 100), 99);
+                        bar.style.width = fakePct + '%';
+                        percentText.textContent = 'Cargando... ' + fakePct + '%';
+                    }
+                }
+
+                // Create blob and assign to video
+                const blob = new Blob(chunks, { type: 'video/mp4' });
+                const blobUrl = URL.createObjectURL(blob);
+                video.src = blobUrl;
+
+                // Wait for video to be ready to play
+                await new Promise((resolve) => {
+                    video.addEventListener('canplaythrough', resolve, { once: true });
+                    video.load();
+                });
+
+                // Set to 100%
+                bar.style.width = '100%';
+                percentText.textContent = 'Cargando... 100%';
+
+                // Brief delay so user sees 100%
+                await new Promise(r => setTimeout(r, 400));
+
+                // Set volume to 25% and try to play
+                video.volume = 0.25;
+                try { await video.play(); } catch(e) { /* autoplay blocked - user can press play */ }
+
+            } catch (err) {
+                // If fetch fails, fallback to direct src
+                video.src = './video-presentacion.mp4';
+                video.volume = 0.25;
+                bar.style.width = '100%';
+                percentText.textContent = '¡Listo!';
+                await new Promise(r => setTimeout(r, 300));
+            }
+
+            // Hide preloader
+            preloader.classList.add('hidden');
+            document.body.classList.remove('loading');
+        })();
+
+        // ========== MOBILE MENU ==========
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.getElementById('nav-links');
         if(mobileMenuBtn && navLinks) {
@@ -324,13 +524,17 @@
         }
 
         lucide.createIcons();
+
+        // ========== NAVBAR SCROLL ==========
         window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
+            if (window.scrollY > 50) {
+                document.getElementById('navbar').classList.add('scrolled');
+            } else {
+                document.getElementById('navbar').classList.remove('scrolled');
+            }
         });
 
-        // Productos destacados
+        // ========== PRODUCTOS DESTACADOS ==========
         const featuredProducts = [
             { folder: "Produ 01-04", file: "Tezza-0480", category: "Colección Brillante" },
             { folder: "Produ 05-01", file: "Tezza-0200", category: "Gemas Aurora" },
@@ -347,7 +551,6 @@
             const item = document.createElement('div');
             item.className = 'product-card';
             
-            // Usamos .webp de la carpeta web-assets, con fallback a original .jpg
             const webpPath = `./web-assets/${p.folder}/${p.file}.webp`;
             const jpgPath = `./${p.folder}/${p.file}.jpg`;
             
