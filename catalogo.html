@@ -342,6 +342,15 @@
 
         lucide.createIcons();
 
+        // ========== NAVBAR SCROLL ==========
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                document.getElementById('navbar').classList.add('scrolled');
+            } else {
+                document.getElementById('navbar').classList.remove('scrolled');
+            }
+        });
+
         // Datos de productos
         const categoryMap = {
             "Produ 01-04": "Colección Brillante",
