@@ -352,7 +352,7 @@
             <div style="flex: 0 0 auto; display: flex; justify-content: center;">
                 <div class="video-frame-outer">
                     <div class="video-frame-inner">
-                        <video id="hero-video" autoplay loop controls playsinline style="width: 100%; height: auto; display: block; object-fit: cover;">
+                        <video id="hero-video" autoplay loop muted controls playsinline style="width: 100%; height: auto; display: block; object-fit: cover;">
                             <!-- Source will be set by preloader JS -->
                         </video>
                     </div>
@@ -512,6 +512,7 @@
                 bar.style.width = '100%';
                 percentText.textContent = '¡Listo!';
                 await new Promise(r => setTimeout(r, 300));
+                try { await video.play(); } catch(e) { /* autoplay blocked */ }
             }
 
             // Hide preloader
