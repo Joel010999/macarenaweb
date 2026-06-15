@@ -449,6 +449,8 @@
 
             try {
                 const response = await fetch('./video-presentacion.mp4');
+                if (!response.ok) throw new Error('Video fetch failed');
+                
                 const contentLength = response.headers.get('Content-Length');
                 const total = contentLength ? parseInt(contentLength, 10) : 0;
                 const reader = response.body.getReader();
@@ -478,9 +480,17 @@
                 const blobUrl = URL.createObjectURL(blob);
                 video.src = blobUrl;
 
-                // Wait for video to be ready to play
+                // Wait for video to be ready to play or fallback after timeout
                 await new Promise((resolve) => {
-                    video.addEventListener('canplaythrough', resolve, { once: true });
+                    let isResolved = false;
+                    const finish = () => {
+                        if (isResolved) return;
+                        isResolved = true;
+                        resolve();
+                    };
+                    video.addEventListener('canplaythrough', finish, { once: true });
+                    video.addEventListener('error', finish, { once: true });
+                    setTimeout(finish, 3000); // 3 second fallback timeout
                     video.load();
                 });
 
