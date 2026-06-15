@@ -440,84 +440,61 @@
     </footer>
 
     <script>
-        // ========== PRELOADER: Download video with progress ==========
-        (async function() {
+        // ========== PRELOADER: Simple and native ==========
+        (function() {
             const bar = document.getElementById('preloader-bar');
             const percentText = document.getElementById('preloader-percent');
             const preloader = document.getElementById('preloader');
             const video = document.getElementById('hero-video');
 
-            try {
-                const response = await fetch('./video-presentacion.mp4');
-                if (!response.ok) throw new Error('Video fetch failed');
-                
-                const contentLength = response.headers.get('Content-Length');
-                const total = contentLength ? parseInt(contentLength, 10) : 0;
-                const reader = response.body.getReader();
-                let received = 0;
-                const chunks = [];
+            // Asignar el video nativamente
+            video.src = './video-presentacion.mp4';
+            video.volume = 0.25;
 
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-                    chunks.push(value);
-                    received += value.length;
-                    
-                    if (total > 0) {
-                        const pct = Math.min(Math.round((received / total) * 100), 100);
-                        bar.style.width = pct + '%';
-                        percentText.textContent = 'Cargando... ' + pct + '%';
-                    } else {
-                        // If no content-length, show animated progress
-                        const fakePct = Math.min(Math.round((received / (received + 500000)) * 100), 99);
-                        bar.style.width = fakePct + '%';
-                        percentText.textContent = 'Cargando... ' + fakePct + '%';
-                    }
-                }
+            // Simular progreso rápido mientras el DOM/recursos cargan
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 5;
+                if (progress > 90) progress = 90; // Se frena en 90% hasta que cargue la ventana
+                bar.style.width = progress + '%';
+                percentText.textContent = 'Cargando... ' + progress + '%';
+            }, 100);
 
-                // Create blob and assign to video
-                const blob = new Blob(chunks, { type: 'video/mp4' });
-                const blobUrl = URL.createObjectURL(blob);
-                video.src = blobUrl;
-
-                // Wait for video to be ready to play or fallback after timeout
-                await new Promise((resolve) => {
-                    let isResolved = false;
-                    const finish = () => {
-                        if (isResolved) return;
-                        isResolved = true;
-                        resolve();
-                    };
-                    video.addEventListener('canplaythrough', finish, { once: true });
-                    video.addEventListener('error', finish, { once: true });
-                    setTimeout(finish, 3000); // 3 second fallback timeout
-                    video.load();
-                });
-
-                // Set to 100%
-                bar.style.width = '100%';
-                percentText.textContent = 'Cargando... 100%';
-
-                // Brief delay so user sees 100%
-                await new Promise(r => setTimeout(r, 400));
-
-                // Set volume to 25% and try to play
-                video.volume = 0.25;
-                try { await video.play(); } catch(e) { /* autoplay blocked - user can press play */ }
-
-            } catch (err) {
-                // If fetch fails, fallback to direct src
-                video.src = './video-presentacion.mp4';
-                video.volume = 0.25;
+            // Cuando la ventana cargue completamente
+            window.addEventListener('load', () => {
+                clearInterval(interval);
                 bar.style.width = '100%';
                 percentText.textContent = '¡Listo!';
-                await new Promise(r => setTimeout(r, 300));
-                try { await video.play(); } catch(e) { /* autoplay blocked */ }
-            }
+                
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.classList.remove('loading');
+                    
+                    // Intentar reproducir el video ahora que el usuario puede ver la pantalla
+                    try {
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(e => {
+                                console.warn("Autoplay bloqueado", e);
+                            });
+                        }
+                    } catch (e) {}
+                }, 400);
+            });
 
-            // Hide preloader
-            preloader.classList.add('hidden');
-            document.body.classList.remove('loading');
+            // Si por alguna razón window.onload ya se disparó o tarda más de 5 segundos, forzar
+            setTimeout(() => {
+                if (!preloader.classList.contains('hidden')) {
+                    clearInterval(interval);
+                    bar.style.width = '100%';
+                    percentText.textContent = '¡Listo!';
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                        document.body.classList.remove('loading');
+                        try { video.play(); } catch(e){}
+                    }, 200);
+                }
+            }, 5000);
         })();
 
         // ========== MOBILE MENU ==========
