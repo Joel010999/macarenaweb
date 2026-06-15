@@ -146,5 +146,24 @@ Medida:<br>
       "./productos/tatuajes-temporales-3.png",
       "./productos/tatuajes-temporales-4.png"
     ]
+  },
+  {
+    id: "pack-emprendedor",
+    name: "PACK EMPRENDEDOR",
+    description: `Todo lo necesario para comenzar tu emprendimiento de Shimmer Wall.<br><br>
+Incluye<br>
+* Estructura extensible y desarmable<br>
+* Paneles shimmer<br>
+* Lentejuelas color a elección<br>
+* Sistema de encastre<br><br>
+Opciones<br>
+* Pack Emprendedor 2x2<br>
+* Pack Emprendedor 3x3`,
+    images: [
+      "./productos/pack-emprendedor-1.png",
+      "./productos/pack-emprendedor-2.png",
+      "./productos/pack-emprendedor-3.png",
+      "./productos/pack-emprendedor-4.png"
+    ]
   }
 ];

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Completo | Male Style</title>
     <meta name="description" content="Catálogo completo de insumos Male Style. Venta mayorista y minorista.">
+    <link rel="icon" type="image/png" href="./Logo/logo-pink.png">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -64,7 +65,7 @@
         nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 0; z-index: 1000; background: transparent; transition: var(--transition); }
         nav.scrolled { padding: 1rem 0; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo img { height: 45px; transition: var(--transition); filter: invert(41%) sepia(58%) saturate(1478%) hue-rotate(309deg) brightness(91%) contrast(93%); }
+        .logo img { height: 45px; transition: var(--transition); }
         .logo:hover img { transform: scale(1.05); }
         .mobile-menu-btn { display: block; background: none; border: none; cursor: pointer; color: var(--pink1); }
         .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: var(--glass-bg); backdrop-filter: blur(20px); padding: 1rem 0; gap: 1rem; box-shadow: var(--glass-shadow); border-bottom: 1px solid var(--glass-border); }
@@ -94,10 +95,14 @@
         @media (min-width: 900px) { .masonry-grid { column-count: 3; } }
         @media (min-width: 1200px) { .masonry-grid { column-count: 4; } }
 
-        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; position: relative; border-radius: 20px; overflow: hidden; background: white; box-shadow: var(--glass-shadow); transform: translateZ(0); animation: fadeIn 0.6s ease-out forwards; }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: fadeIn 0.6s ease-out forwards, skeletonLoading 1.5s infinite; box-shadow: var(--glass-shadow); transform: translateZ(0); min-height: 200px; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes skeletonLoading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        .masonry-item img { width: 100%; display: block; transition: var(--transition); }
+        .masonry-item img { width: 100%; display: block; transition: var(--transition); opacity: 0; }
+        .masonry-item.loaded { background: white; animation: none; }
+        .masonry-item.loaded img { opacity: 1; }
+        
         .masonry-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: var(--transition); padding: 1rem; text-align: center; }
         .masonry-item:hover img { transform: scale(1.1); }
         .masonry-item:hover .masonry-overlay { opacity: 1; }
@@ -203,7 +208,7 @@
         footer { background: var(--pink1); color: white; padding: 4rem 0 2rem; border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 3rem; }
         .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
         @media (min-width: 900px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
-        .footer-logo img { height: 40px; filter: brightness(0) invert(1); margin-bottom: 1rem; }
+        .footer-logo img { height: 40px; margin-bottom: 1rem; }
         .footer-links h5 { font-size: 1.3rem; margin-bottom: 1.5rem; font-family: 'Tropical', serif; }
         .footer-links ul { list-style: none; }
         .footer-links li { margin-bottom: 0.8rem; }
@@ -228,7 +233,7 @@
     <nav id="navbar">
         <div class="container nav-content" style="flex-wrap: wrap; position: relative;">
             <a href="index.html" class="logo">
-                <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo">
+                <img src="./Logo/logo-pink.png" alt="Male Style Logo">
             </a>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
                 <a href="https://wa.me/5493585706305" class="btn btn-whatsapp" style="padding: 0.5rem 1rem; font-size: 0.7rem;">
@@ -292,7 +297,7 @@
         <div class="container footer-grid">
             <div>
                 <div class="footer-logo">
-                    <img src="./Logo/PNG transparente/Recurso 24@2x.png" alt="Male Style Logo Blanco">
+                    <img src="./Logo/logo-white.png" alt="Male Style Logo Blanco">
                 </div>
                 <p style="opacity: 0.8; font-size: 1.1rem; max-width: 400px; margin-bottom: 2rem;">Autoridad en el rubro de la decoración para eventos. Siempre con las últimas tendencias.</p>
             </div>
@@ -368,7 +373,7 @@
         const loadMoreBtn = document.getElementById('load-more-btn');
         let currentFilter = 'all';
         let currentIndex = 0;
-        const itemsPerPage = 20;
+        const itemsPerPage = 12;
         let filteredArray = [];
 
         function renderProducts(reset = true) {
@@ -392,7 +397,7 @@
                 const wpLink = `https://wa.me/5493585706305?text=${wpMessage}`;
 
                 item.innerHTML = `
-                    <img src="${p.pathWebp}" loading="lazy" onerror="this.src='${p.pathOriginal}'" alt="${p.category}">
+                    <img src="${p.pathWebp}" loading="lazy" onload="this.parentElement.classList.add('loaded');" onerror="this.src='${p.pathOriginal}'" alt="${p.category}">
                     <div class="masonry-overlay">
                         <div class="product-code">${p.category}</div>
                         <a href="${wpLink}" target="_blank" class="btn-whatsapp">
