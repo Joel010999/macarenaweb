@@ -1,5 +1,28 @@
 const productosPrincipales = [
   {
+    id: "cortinas-lentejuelas",
+    name: "Cortinas de lentejuelas",
+    description: `Un detalle diferente para transformar cualquier deco.<br><br>
+✨ 10 tiras individuales<br>
+✨ 1 metro de largo cada tira<br>
+✨ Lentejuelas de 3 y 5 cm<br>
+✨ Se pueden unir entre sí para lograr el largo y tamaño que necesites`,
+    images: [
+      "./productos/novedades/cortinas-lentejuelas.png"
+    ]
+  },
+  {
+    id: "carteles-led",
+    name: "Carteles LED",
+    description: `Iluminá tu evento con carteles LED llenos de color.<br><br>
+🌈 Arcoíris — 30 × 17 cm<br>
+🎂 Feliz Cumpleaños — 44 × 23 cm<br>
+💖 Let’s Party fucsia — 42 × 20 cm`,
+    images: [
+      "./productos/novedades/carteles-led.png"
+    ]
+  },
+  {
     id: "shimmer-wall",
     name: "✨✨ SHIMMER WALL",
     description: `Medidas disponibles:<br><br>
