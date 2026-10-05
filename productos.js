@@ -8,18 +8,25 @@ const productosPrincipales = [
 ✨ Lentejuelas de 3 y 5 cm<br>
 ✨ Se pueden unir entre sí para lograr el largo y tamaño que necesites`,
     images: [
-      "./productos/novedades/cortinas-lentejuelas.png"
+      "./productos/novedades/cortinas-lentejuelas.png",
+      "./productos/novedades/cortinas-lentejuelas-1.png",
+      "./productos/novedades/cortinas-lentejuelas-2.png",
+      "./productos/novedades/cortinas-lentejuelas-3.png",
+      "./productos/novedades/cortinas-lentejuelas-4.png",
+      "./productos/novedades/cortinas-lentejuelas-5.png",
+      "./productos/novedades/cortinas-lentejuelas-6.png",
+      "./productos/novedades/cortinas-lentejuelas-7.png"
     ]
   },
   {
     id: "carteles-led",
-    name: "Carteles LED",
-    description: `Iluminá tu evento con carteles LED llenos de color.<br><br>
-🌈 Arcoíris — 30 × 17 cm<br>
-🎂 Feliz Cumpleaños — 44 × 23 cm<br>
-💖 Let’s Party fucsia — 42 × 20 cm`,
+    name: "✨ CARTELES LED – MALE STYLE ✨",
+    description: `🌈 Arcoíris<br>Medida: 30 × 17 cm<br><br>🎂 Feliz Cumpleaños<br>Medida: 44 × 23 cm<br><br>💖 Let’s Party – Fucsia<br>Medida: 42 × 20 cm`,
     images: [
-      "./productos/novedades/carteles-led.png"
+      "./productos/novedades/carteles-led-1.png",
+      "./productos/novedades/carteles-led-2.png",
+      "./productos/novedades/carteles-led-3.png",
+      "./productos/novedades/carteles-led-4.png"
     ]
   },
   {
